@@ -1,13 +1,19 @@
 require("dotenv").config();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
-const { name } = require("ejs");
-const e = require("express");
 const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 
 const createUserService = async (name,email,password) => {
     try {
+        //check user exist in db
+        const user = await User.findOne({email});
+        if(user){
+            return {
+                EC: 1,
+            }
+        }
+
         //hash user password
         const hashPassword = await bcrypt.hash(password, saltRounds);
         //save user to db
@@ -17,7 +23,14 @@ const createUserService = async (name,email,password) => {
             password: hashPassword,
             role: "user"
         })
-        return result;
+        const userInfor = {
+            name : result.name,
+            email : result.email
+        };
+        return {
+            EC: 0,
+            userInfor
+        }
 
     } catch (error) {
         console.log(error);
@@ -70,7 +83,18 @@ const loginService = async (email1,password) => {
     }
 }
 
+const getUserService = async () => {
+    try {
+        let result = await User.find({}).select("-password -__v");
+        return result;
+
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
 
 module.exports = {
-    createUserService,loginService
+    createUserService,loginService,getUserService
 }
