@@ -51,6 +51,7 @@ const loginService = async (email1,password) => {
                 }
             }else {
                 const payload = {
+                    userId: user._id, // them userID vao acess_token de tuy van cau tra loi dua vao userID
                     name: user.name,
                     email: user.email,
                 }
@@ -65,6 +66,7 @@ const loginService = async (email1,password) => {
                     EC: 0,
                     access_token,
                     user: {
+                        userId: user._id, // Trả về userID để frontend có thể sử dụng nếu cần
                         email: user.email,
                         name: user.name,
                     }

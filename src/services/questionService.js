@@ -1,9 +1,13 @@
 const questionSP = require("../models/question");
 
-const getQuestionSPService = async () => {
+const getQuestionSPService = async (quesID) => {
     try {
-        let result = await questionSP.find({});
-        return result;
+        let result = await questionSP.findOne({QuestionID : quesID});
+        if(result){
+            console.log(">>Check result in getQuestionSPService : ",result);
+            return result;
+        }
+        return null;
 
     } catch (error) {
         console.log(error);

@@ -1,8 +1,9 @@
 const { getQuestionSPService, createQuestionSPService } = require("../services/questionService");
 
 const getQuestionSP = async (req,res) => {
-    
-    const data = await getQuestionSPService();
+    console.log(">>check req.query in getQuestionSP : ", req.query)
+    const {QuestionID} = req.query;
+    const data = await getQuestionSPService(QuestionID);
     
     return res.status(200).json(data);
 }

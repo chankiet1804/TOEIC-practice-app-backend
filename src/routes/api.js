@@ -2,6 +2,7 @@ const express = require('express');
 const { createUser,handleLogin, getUser } = require('../controllers/userController');
 const auth = require('../middleware/auth');
 const { getQuestionSP, createQuestionSP } = require('../controllers/questionController');
+const { createAnswerSP, getAnswerSP } = require('../controllers/answerController');
 
 const routerAPI = express.Router();
 
@@ -17,6 +18,9 @@ routerAPI.get("/user",getUser)
 
 routerAPI.post("/question/create/speaking",createQuestionSP)
 routerAPI.get("/question/speaking",getQuestionSP)
+
+routerAPI.post("/answer/create/speaking",createAnswerSP);
+routerAPI.get("/answer/speaking",getAnswerSP);
 
 
 module.exports = routerAPI; //export default
