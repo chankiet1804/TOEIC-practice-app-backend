@@ -17,19 +17,19 @@ const getAnswerSPService = async (UserID, QuestionID) => {
 
 const createAnswerSPService = async (userID,quesID,path,content) => {
     try {
-        // can bo sung them neu cua tra loi nay da ton tai thi sua lai data cu chu ko tao moi
+        let result = await answerSP.findOneAndUpdate(
+            { UserID: userID, QuestionID: quesID }, // Điều kiện tìm kiếm
+            { 
+                RecordingPath: path, 
+                ContentOfSpeaking: content 
+            }, // Dữ liệu cần cập nhật
+            { 
+                new: true, // Trả về document sau khi cập nhật
+                upsert: true // Nếu không tìm thấy, sẽ tạo mới
+            }
+        );
 
-        let result = await answerSP.create({
-            UserID : userID,
-            QuestionID : quesID,
-            RecordingPath : path,
-            ContentOfSpeaking : content
-
-        })
-        //console.log("check result in createAnswerSPService : ", result)
-        return {
-            result
-        }
+        return { result };
 
     } catch (error) {
         console.log(error);
