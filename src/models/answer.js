@@ -7,6 +7,14 @@ const answerSPSchema = new mongoose.Schema({
     ContentOfSpeaking : String
 });
 
-const answerSP = mongoose.model('answerSP', answerSPSchema);
+const answerWRSchema = new mongoose.Schema({
+    UserID : String,
+    QuestionID : String,
+    Content : String,
+    Feedback : String
+});
 
-module.exports = answerSP;
+const answerSP = mongoose.model('answerSP', answerSPSchema);
+const answerWR = mongoose.model('answerWR', answerWRSchema);
+
+module.exports = {answerSP,answerWR};

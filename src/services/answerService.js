@@ -1,4 +1,4 @@
-const answerSP = require("../models/answer");
+const {answerSP,answerWR} = require("../models/answer");
 
 const getAnswerSPService = async (UserID, QuestionID) => {
     try {
@@ -37,7 +37,46 @@ const createAnswerSPService = async (userID,quesID,path,content) => {
     }
 }
 
+const getAnswerWRService = async (UserID, QuestionID) => {
+    try {
+        let result = await answerWR.findOne({UserID, QuestionID});
+        if(result){
+            console.log(">>Check result in getAnswerWRService : ",result);
+            return result;
+        }
+        return null;
+
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+const createAnswerWRService = async (userID,quesID,content,feedback) => {
+    try {
+        let result = await answerWR.findOneAndUpdate(
+            { UserID: userID, QuestionID: quesID }, // Điều kiện tìm kiếm
+            {  
+                Content: content,
+                Feedback: feedback
+            }, // Dữ liệu cần cập nhật
+            { 
+                new: true, // Trả về document sau khi cập nhật
+                upsert: true // Nếu không tìm thấy, sẽ tạo mới
+            }
+        );
+
+        return { result };
+
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
 module.exports = {
     getAnswerSPService,
-    createAnswerSPService
+    createAnswerSPService,
+    createAnswerWRService,
+    getAnswerWRService
 }

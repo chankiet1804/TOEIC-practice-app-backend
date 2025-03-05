@@ -1,8 +1,8 @@
 const express = require('express');
 const { createUser,handleLogin, getUser } = require('../controllers/userController');
 const auth = require('../middleware/auth');
-const { getQuestionSP, createQuestionSP } = require('../controllers/questionController');
-const { createAnswerSP, getAnswerSP } = require('../controllers/answerController');
+const { getQuestionSP, createQuestionSP, createQuestionWR, getQuestionWR } = require('../controllers/questionController');
+const { createAnswerSP, getAnswerSP, createAnswerWR, getAnswerWR } = require('../controllers/answerController');
 
 const routerAPI = express.Router();
 
@@ -21,6 +21,12 @@ routerAPI.get("/question/speaking",getQuestionSP)
 
 routerAPI.post("/answer/create/speaking",createAnswerSP);
 routerAPI.get("/answer/speaking",getAnswerSP);
+
+routerAPI.post("/question/create/writing",createQuestionWR)
+routerAPI.get("/question/writing",getQuestionWR)
+
+routerAPI.post("/answer/create/writing",createAnswerWR);
+routerAPI.get("/answer/writing",getAnswerWR);
 
 
 module.exports = routerAPI; //export default
