@@ -59,7 +59,9 @@ const createQuestionWR = async (req,res) => {
         Question2,
         Question3,
         PreparationTime,
-        ResponseTime
+        ResponseTime,
+        Suggestion1,
+        Suggestion2
     } = req.body;
     const data = await createQuestionWRService(QuestionID,
         QuestionType,
@@ -71,7 +73,9 @@ const createQuestionWR = async (req,res) => {
         Question2,
         Question3,
         PreparationTime,
-        ResponseTime);
+        ResponseTime,
+        Suggestion1,
+        Suggestion2);
     
     return res.status(200).json(data);
 }

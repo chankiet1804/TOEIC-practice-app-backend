@@ -26,6 +26,8 @@ const questionWRSchema = new mongoose.Schema({
     Question3 : String,
     PreparationTime : Number,
     ResponseTime : Number,
+    Suggestion1 : String,
+    Suggestion2 : String
 });
 
 const questionSP = mongoose.model('questionSP', questionSPSchema);

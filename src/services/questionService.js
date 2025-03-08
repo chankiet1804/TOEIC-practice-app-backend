@@ -57,7 +57,7 @@ const createQuestionSPService = async (quesID,type,cont1,cont2,img1,img2,ques1,q
     }
 }
 
-const createQuestionWRService = async (quesID,type,cont1,cont2,img1,img2,ques1,ques2,ques3,pre,resp) => {
+const createQuestionWRService = async (quesID,type,cont1,cont2,img1,img2,ques1,ques2,ques3,pre,resp,sug1,sug2) => {
     try {
         
         let result = await questionWR.create({
@@ -72,6 +72,8 @@ const createQuestionWRService = async (quesID,type,cont1,cont2,img1,img2,ques1,q
             Question3 : ques3,
             PreparationTime : pre,
             ResponseTime : resp,
+            Suggestion1 : sug1,
+            Suggestion2: sug2
         })
         console.log("check result : ", result)
         return {
